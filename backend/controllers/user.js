@@ -35,3 +35,66 @@ export const login = catchAsyncError(async (req, res, next) => {
 
   sendCookie(user, res, `Welcome back ${user.name} `, 200);
 });
+
+export const addDetails = catchAsyncError(async (req, res, next) => {
+  const {
+    name,
+    gender,
+    address,
+    mobileNo,
+    drivingLicenceNo,
+    image,
+    birthdate,
+  } = req.body;
+
+  await User.updateMany({
+    name,
+    gender,
+    address,
+    mobileNo,
+    drivingLicenceNo,
+    image,
+    birthdate,
+  });
+
+  res.status(200).json({
+    success: true,
+    message: "User successfully updated",
+  });
+});
+
+//Get user details
+
+export const userDetails = catchAsyncError(async (req, res) => {
+  res.status(200).json({
+    success: true,
+    user: req.user,
+  });
+});
+
+export const deactivateAccount = catchAsyncError(async (req, res) => {
+  const { id, name } = req.user;
+  await User.findByIdAndDelete(id);
+  res
+    .status(200)
+    .json({
+      success: true,
+      message: `${name} Your Account Has Been Deactivated`,
+    });
+});
+
+//logout controler
+
+export const logout = catchAsyncError(async (req, res) => {
+  res
+    .status(200)
+    .cookie("token", "", {
+      expiers: new Date(Date.now()),
+      sameSite: process.env.NODE_ENV === "Development" ? "lax" : "none",
+      secure: process.env.NODE_ENV === "Development" ? false : true,
+    })
+    .json({
+      success: true,
+      message: "logout successfully",
+    });
+});
