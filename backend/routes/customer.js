@@ -1,4 +1,5 @@
 import express from "express";
+const router = express.Router();
 import {
   addDetails,
   deactivateAccount,
@@ -6,10 +7,8 @@ import {
   logout,
   register,
   userDetails,
-} from "../controllers/user.js";
+} from "../controllers/Customer.js";
 import { isAuthenticated } from "../middlewares/Auth.js";
-
-const router = express.Router();
 
 router.post("/new", register);
 router.get("/me", login);

@@ -21,16 +21,15 @@ const schema = mongoose.Schema({
     enum: ["Male", "Female", "Other"], // Enumerated values for gender
   },
   mobileNo: {
-    type: String,
+    type: Number,
 
     unique: true, // Mobile numbers should be unique
   },
   address: {
     type: String,
   },
-  drivingLicenceNo: {
-    type: String,
-
+  addharNo: {
+    type: Number,
     unique: true, // Driving license numbers should be unique
   },
   image: {
@@ -39,9 +38,13 @@ const schema = mongoose.Schema({
   birthdate: {
     type: Date,
   },
+  panNo: {
+    type: String,
+    unique: true,
+  },
   createdAt: {
     type: Date,
     default: Date.now,
   },
 });
-export const User = mongoose.model("User", schema);
+export const Vender = mongoose.model("Vender", schema);
