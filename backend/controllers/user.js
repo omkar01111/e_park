@@ -1,53 +1,37 @@
 import { User } from "../models/user.js";
 import bcrypt from "bcrypt";
 import { sendCookie } from "../utils/feature.js";
+import ErrorHandler from "../utils/errorHandler.js";
+import { catchAsyncError } from "../middlewares/CatchAsyncError.js";
 
-export const register = async (req, res) => {
-  try {
-    const { name, email, password } = req.body;
+//Rgister code
+export const register = catchAsyncError(async (req, res, next) => {
+  const { name, email, password } = req.body;
 
-    let user = await User.findOne({ email });
+  let user = await User.findOne({ email });
 
-    if (user) {
-      return res.status(403).json({
-        success: false,
-        message: `${email} already registered.`,
-      });
-    }
+  if (user)
+    return next(new ErrorHandler("This email is already registered.", "400"));
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+  const hashedPassword = await bcrypt.hash(password, 10);
 
-    user = await User.create({ name, email, password: hashedPassword });
+  user = await User.create({ name, email, password: hashedPassword });
 
-    sendCookie(user, res, `Registed successfully`, 200);
-  } catch (error) {
-    console.error(error); // Log the error for debugging purposes
-    res.status(500).json({
-      success: false,
-      message: "Registration failed. Please try again later.",
-    });
-  }
-};
+  sendCookie(user, res, `Registed successfully`, 200);
+});
 
-export const login = async (req, res, next) => {
-  try {
-    const { email, password } = req.body;
+//login controler
 
-    let user = await User.findOne({ email }).select("+password");
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!user && !isMatch) {
-      return res.status(404).json({
-        success: false,
-        message: `username and password are incorrect`,
-      });
-    }
+export const login = catchAsyncError(async (req, res, next) => {
+  const { email, password } = req.body;
 
-    sendCookie(user, res, `Welcome back ${user.name} `, 201);
-  } catch (error) {
-    console.error(error); // Log the error for debugging purposes
-    res.status(500).json({
-      success: false,
-      message: "Registration failed. Please try again later.",
-    });
-  }
-};
+  let user = await User.findOne({ email }).select("+password");
+  if (!user)
+    return next(new ErrorHandler(`username and password are incorrect`, 404));
+
+  const isMatch = await bcrypt.compare(password, user.password);
+  if (!isMatch)
+    return next(new ErrorHandler(`username and password are incorrect`, 404));
+
+  sendCookie(user, res, `Welcome back ${user.name} `, 200);
+});
