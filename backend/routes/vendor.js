@@ -4,23 +4,23 @@ const router = express.Router();
 
 import { isAuthenticated } from "../middlewares/Auth.js";
 import {
-  addDetails_V,
-  deactivateAccount_V,
-  login_V,
-  logout_V,
-  register_V,
-  userDetails_V,
+  completeVenderDetails,
+  deactivateVenderAccount,
+  getVenderDetails,
+  loginVender,
+  logoutVender,
+  registerVender,
 } from "../controllers/Vender.js";
 
-router.post("/new", register_V);
-router.get("/me", login_V);
+router.post("/new", registerVender);
+router.get("/me", loginVender);
 
 router
   .route("/details")
-  .put(isAuthenticated, addDetails_V)
-  .get(isAuthenticated, userDetails_V);
+  .put(isAuthenticated, completeVenderDetails)
+  .get(isAuthenticated, getVenderDetails);
 
-router.delete("/deactivate", isAuthenticated, deactivateAccount_V);
-router.get("/logout", logout_V);
+router.delete("/deactivate", isAuthenticated, deactivateVenderAccount);
+router.get("/logout", logoutVender);
 
 export default router;

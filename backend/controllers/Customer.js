@@ -1,98 +1,56 @@
 import { Customer } from "../models/cutomer.js";
-import bcrypt from "bcrypt";
-import { sendCookie } from "../utils/feature.js";
-import ErrorHandler from "../utils/errorHandler.js";
 import { catchAsyncError } from "../middlewares/CatchAsyncError.js";
+import { Vender } from "../models/vender.js";
+import {
+  deactivateUser,
+  getUserDetails,
+  loginUser,
+  logoutUser,
+  registerUser,
+} from "../utils/authUtils.js";
 
 //Rgister code
-export const register = catchAsyncError(async (req, res, next) => {
-  const { name, email, password } = req.body;
-
-  let user = await Customer.findOne({ email });
-
-  if (user)
-    return next(new ErrorHandler("This email is already registered.", "400"));
-
-  const hashedPassword = await bcrypt.hash(password, 10);
-
-  user = await Customer.create({ name, email, password: hashedPassword });
-
-  sendCookie(user, res, `Registed successfully`, 200);
+export const registerCustomer = catchAsyncError(async (req, res, next) => {
+  await registerUser(req, res, next, Customer, Vender);
 });
 
 //login controler
 
-export const login = catchAsyncError(async (req, res, next) => {
-  const { email, password } = req.body;
-
-  let user = await Customer.findOne({ email }).select("+password");
-  if (!user)
-    return next(new ErrorHandler(`username and password are incorrect`, 404));
-
-  const isMatch = await bcrypt.compare(password, user.password);
-  if (!isMatch)
-    return next(new ErrorHandler(`username and password are incorrect`, 404));
-
-  sendCookie(user, res, `Welcome back ${user.name} `, 200);
+export const loginCustomer = catchAsyncError(async (req, res, next) => {
+  await loginUser(req, res, next, Customer);
 });
 
-export const addDetails = catchAsyncError(async (req, res, next) => {
-  const {
-    name,
-    gender,
-    address,
-    mobileNo,
-    drivingLicenceNo,
-    image,
-    birthdate,
-  } = req.body;
+export const completeCustomerDetails = catchAsyncError(
+  async (req, res, next) => {
+    const { gender, address, mobileNo, drivingLicenceNo, image, birthdate } =
+      req.body;
+    const userId = req.user._id;
+    const updatedCustomer = await Customer.findByIdAndUpdate(
+      userId,
+      { gender, address, mobileNo, drivingLicenceNo, image, birthdate },
+      { new: true }
+    );
 
-  await Customer.updateMany({
-    name,
-    gender,
-    address,
-    mobileNo,
-    drivingLicenceNo,
-    image,
-    birthdate,
-  });
-
-  res.status(200).json({
-    success: true,
-    message: "User successfully updated",
-  });
-});
+    res.status(200).json({
+      success: true,
+      message: "Customer details updated successfully",
+      user: updatedCustomer,
+    });
+  }
+);
 
 //Get user details
 
-export const userDetails = catchAsyncError(async (req, res) => {
-  res.status(200).json({
-    success: true,
-    user: req.user,
-  });
+export const getCustomerDetails = catchAsyncError(async (req, res) => {
+  await getUserDetails(req, res, Customer);
 });
 
-export const deactivateAccount = catchAsyncError(async (req, res) => {
-  const { id, name } = req.user;
-  await Customer.findByIdAndDelete(id);
-  res.status(200).json({
-    success: true,
-    message: `${name} Your Account Has Been Deactivated`,
-  });
+export const deactivateCustomerAccount = catchAsyncError(async (req, res) => {
+  await deactivateUser(req, res, Customer);
 });
 
 //logout controler
 
-export const logout = catchAsyncError(async (req, res) => {
-  res
-    .status(200)
-    .cookie("token", "", {
-      expiers: new Date(Date.now()),
-      sameSite: process.env.NODE_ENV === "Development" ? "lax" : "none",
-      secure: process.env.NODE_ENV === "Development" ? false : true,
-    })
-    .json({
-      success: true,
-      message: "logout successfully",
-    });
+export const logoutCustomer = catchAsyncError((req, res) => {
+  logoutUser(req, res);
 });

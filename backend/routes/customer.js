@@ -1,24 +1,24 @@
 import express from "express";
 const router = express.Router();
 import {
-  addDetails,
-  deactivateAccount,
-  login,
-  logout,
-  register,
-  userDetails,
+  completeCustomerDetails,
+  deactivateCustomerAccount,
+  getCustomerDetails,
+  loginCustomer,
+  logoutCustomer,
+  registerCustomer,
 } from "../controllers/Customer.js";
 import { isAuthenticated } from "../middlewares/Auth.js";
 
-router.post("/new", register);
-router.get("/me", login);
+router.post("/new", registerCustomer);
+router.get("/me", loginCustomer);
 
 router
   .route("/details")
-  .put(isAuthenticated, addDetails)
-  .get(isAuthenticated, userDetails);
+  .put(isAuthenticated, completeCustomerDetails)
+  .get(isAuthenticated, getCustomerDetails);
 
-router.delete("/deactivate", isAuthenticated, deactivateAccount);
-router.get("/logout", logout);
+router.delete("/deactivate", isAuthenticated, deactivateCustomerAccount);
+router.get("/logout", logoutCustomer);
 
 export default router;
