@@ -11,7 +11,6 @@ const customerSchema = new mongoose.Schema({
   drivingLicenceNo: String,
   image: String,
   birthdate: Date,
-  vehicles: [Vehicle.schema],
 });
 
 export const Customer = mongoose.model("Customer", customerSchema);

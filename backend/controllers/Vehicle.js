@@ -22,8 +22,8 @@ export const addVehicle = catchAsyncError(async (req, res, next) => {
 });
 
 export const getAllVehicals = catchAsyncError(async (req, res) => {
-  const userId = req.user._id;
-  const vehicle = await Vehicle.find({ userId });
+  const id = req.user._id;
+  const vehicle = await Vehicle.find({ user: id });
   res.status(200).json({
     success: true,
     vehicle,
