@@ -11,7 +11,7 @@ import {
 import { isAuthenticated } from "../middlewares/Auth.js";
 
 router.post("/new", registerCustomer);
-router.get("/me", loginCustomer);
+router.post("/me", loginCustomer);
 
 router
   .route("/details")

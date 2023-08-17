@@ -11,6 +11,7 @@ const customerSchema = new mongoose.Schema({
   drivingLicenceNo: String,
   image: String,
   birthdate: Date,
+  user:{ type: String, default: 'Customer' }
 });
 
 export const Customer = mongoose.model("Customer", customerSchema);

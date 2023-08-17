@@ -10,6 +10,7 @@ const venderSchema = new mongoose.Schema({
   mobileNo: String,
   gstNumber: String,
   image: String,
+  user:{ type: String, default: 'Customer' }
 });
 
 export const Vender = mongoose.model("Vender", venderSchema);

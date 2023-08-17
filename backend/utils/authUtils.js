@@ -16,7 +16,7 @@ export const registerUser = async (
     (await secondUserType.findOne({ email }));
 
   if (user)
-    return next(new ErrorHandler("This email is already registered.", "400"));
+    return next(new ErrorHandler("This email is already registered.", 400));
 
   const hashedPassword = await bcrypt.hash(password, 10);
 

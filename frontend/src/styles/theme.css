@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Averia+Libre:wght@300;400;700&family=Hind+Madurai:wght@300;400;500;600;700&family=Montserrat+Alternates:wght@100;200;300;400;500;600;700;800;900&display=swap');
+:root {
+  --primary-color: "#FFF";
+  --second-color: "#001e2b";
+  --third-color: "#00ed64";
+  --fourth-color: "#21313c";
+  --fifth-color: "#CAD5CF";
+  --primary-font-color: "#899197";
+}
+.navBar {
+  background-color: var(--primary-color);
+}
+
+/* font-family: 'Averia Libre', cursive;
+font-family: 'Hind Madurai', sans-serif;
+font-family: 'Montserrat Alternates', sans-serif; */

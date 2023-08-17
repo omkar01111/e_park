@@ -84,7 +84,7 @@ export const getAllSlot = catchAsyncError(async (req, res, next) => {
   console.log("1");
   const parkingId = req.user._id;
   console.log(parkingId);
-  const parking = await Parking.findById( user: parkingId );
+  const parking = await Parking.findById({ user: parkingId} );
   console.log("3");
   if (!parkingId) return next(new ErrorHandler("Invalid", 400));
   console.log("4");
