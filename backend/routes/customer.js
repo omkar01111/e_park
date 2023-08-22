@@ -4,14 +4,14 @@ import {
   completeCustomerDetails,
   deactivateCustomerAccount,
   getCustomerDetails,
-  loginCustomer,
-  logoutCustomer,
+  // loginCustomer,
+  // logoutCustomer,
   registerCustomer,
 } from "../controllers/Customer.js";
 import { isAuthenticated } from "../middlewares/Auth.js";
 
 router.post("/new", registerCustomer);
-router.post("/me", loginCustomer);
+// router.post("/me", loginCustomer);
 
 router
   .route("/details")
@@ -19,6 +19,6 @@ router
   .get(isAuthenticated, getCustomerDetails);
 
 router.delete("/deactivate", isAuthenticated, deactivateCustomerAccount);
-router.get("/logout", logoutCustomer);
+// router.get("/logout", logoutCustomer);
 
 export default router;

@@ -1,15 +1,26 @@
 import React, { useState } from "react";
 import { server } from "../main";
-import { Box, Button, Container, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Container,
+  TextField,
+  Typography,
+} from "@mui/material";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { toastErrorMessage } from "../utils/ErrorHandler";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login, logout } from "../store/reducer/Reducers";
 
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch=useDispatch()
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -26,19 +37,21 @@ const Login = () => {
       const user = data.user.user;
 
       if (user === "Vender") {
-        navigate("/user");
+        navigate("/user/Vender/Dashbord");
+        dispatch(login(data.user))
         toast.success(data.message);
-
-       
       } else if (user === "Customer") {
         navigate("/");
+        dispatch(login(data.user))
         toast.success(data.message);
-        
       } else {
         toast.error("An error occurred during login.");
+        dispatch(logout())
       }
+     
     } catch (error) {
       toastErrorMessage(error);
+      dispatch(logout())
     }
   };
   return (
@@ -47,33 +60,101 @@ const Login = () => {
         display={"flex"}
         justifyContent={"center"}
         width={"100vw"}
-        height={"100%"}
+        height={"80vh"}
       >
-        <Box>
-          <form onSubmit={submitHandler} action="/">
-            <Typography>Login up to get best parking loction.</Typography>
+        <Card
+          display={"flex"}
+          justifyContent={"center"}
+          alignItems={"center"}
+          flexDirection={"row"}
+          sx={{
+            width: "450px",
+            border: "1px solid #9287876b",
+          }}
+        >
+          <CardContent
+            display={"flex"}
+            justifyContent={"center"}
+            alignItems={"center"}
+            sx={{
+            
+              height: "100%",
+            }}
+          >
+            <Typography
+              variant="h6"
+              sx={{
+              
+                position: "relative",
+                margin: "9% auto",
+                left: "25%",
+              }}
+            >
+              Login in to <Typography variant="span" color={"green"} sx={{fontFamily:"'Averia Libre', cursive",}}>EasyPark</Typography>
+            </Typography>
+            <form
+              onSubmit={submitHandler}
+              style={{
+                display: "flex",
+                flexDirection: "column",
 
-            <TextField
-              id="email"
-              type="email"
-              value={email}
-              label="Email"
-              variant="standard"
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <TextField
-              id="password"
-              type="password"
-              value={password}
-              label="password"
-              variant="standard"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <Button type="submit" disabled={email === "" || password === ""}>
-              Submit
-            </Button>
-          </form>
-        </Box>
+                justifyContent: "space-evenly",
+                height: "60%",
+              }}
+              action="/"
+            >
+              <TextField
+              color="success"
+                id="email"
+                type="email"
+                value={email}
+                label="Email"
+                variant="outlined"
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <TextField
+              
+              color="success"
+                id="password"
+                type="password"
+                value={password}
+                label="password"
+                variant="outlined"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <Button type="submit" variant="contained" disabled={email === "" || password === ""} sx={{
+              backgroundColor: "#00ed64",
+              border: "0.5px solid #000000",
+              borderRadius: "10px",
+              minWidth: "330px",
+              height: "50px",
+              margin: "0px 5px ",
+
+              fontWeight: "500",
+              color: "#000000",
+              fontFamily: "Montserrat Alternates, sans-serif",
+
+              "&:hover": {
+                transition: "1s",
+                borderRadius: "50px",
+                border: "0.5px solid #000000",
+                backgroundColor: "#00ed64",
+              },
+            }}>
+                Submit
+              </Button>
+            </form>
+
+            <Typography sx={{
+                position: "relative",
+                position: "relative",
+                margin: "9% auto",
+                left: "15%",
+              }}>
+            Don't have an ePark account? <Link to="/user" style={{color:"green"}}>Register</Link>
+          </Typography>
+          </CardContent>
+        </Card>
       </Box>
     </>
   );

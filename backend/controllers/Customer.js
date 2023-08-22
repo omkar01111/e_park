@@ -4,8 +4,8 @@ import { Vender } from "../models/vender.js";
 import {
   deactivateUser,
   getUserDetails,
-  loginUser,
-  logoutUser,
+  // loginUser,
+  // logoutUser,
   registerUser,
 } from "../utils/authUtils.js";
 
@@ -16,9 +16,9 @@ export const registerCustomer = catchAsyncError(async (req, res, next) => {
 
 //login controler
 
-export const loginCustomer = catchAsyncError(async (req, res, next) => {
-  await loginUser(req, res, next, Customer);
-});
+// export const loginCustomer = catchAsyncError(async (req, res, next) => {
+//   await loginUser(req, res, next, Customer);
+// });
 
 export const completeCustomerDetails = catchAsyncError(
   async (req, res, next) => {
@@ -51,6 +51,6 @@ export const deactivateCustomerAccount = catchAsyncError(async (req, res) => {
 
 //logout controler
 
-export const logoutCustomer = catchAsyncError((req, res) => {
-  logoutUser(req, res);
-});
+// export const logoutCustomer = catchAsyncError((req, res) => {
+//   logoutUser(req, res);
+// });

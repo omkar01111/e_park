@@ -7,13 +7,13 @@ import {
   completeVenderDetails,
   deactivateVenderAccount,
   getVenderDetails,
-  loginVender,
-  logoutVender,
+  // loginVender,
+  // logoutVender,
   registerVender,
 } from "../controllers/Vender.js";
 
 router.post("/new", registerVender);
-router.get("/me", loginVender);
+// router.get("/me", loginVender);
 
 router
   .route("/details")
@@ -21,6 +21,6 @@ router
   .get(isAuthenticated, getVenderDetails);
 
 router.delete("/deactivate", isAuthenticated, deactivateVenderAccount);
-router.get("/logout", logoutVender);
+// router.get("/logout", logoutVender);
 
 export default router;

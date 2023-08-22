@@ -25,19 +25,19 @@ export const registerUser = async (
   sendCookie(user, res, `Registed successfully`, 200);
 };
 
-export const loginUser = async (req, res, next, userType) => {
-  const { email, password } = req.body;
+// export const loginUser = async (req, res, next, userType) => {
+//   const { email, password } = req.body;
 
-  let user = await userType.findOne({ email }).select("+password");
-  if (!user)
-    return next(new ErrorHandler(`username and password are incorrect`, 404));
+//   let user = await userType.findOne({ email }).select("+password");
+//   if (!user)
+//     return next(new ErrorHandler(`username and password are incorrect`, 404));
 
-  const isMatch = await bcrypt.compare(password, user.password);
-  if (!isMatch)
-    return next(new ErrorHandler(`username and password are incorrect`, 404));
+//   const isMatch = await bcrypt.compare(password, user.password);
+//   if (!isMatch)
+//     return next(new ErrorHandler(`username and password are incorrect`, 404));
 
-  sendCookie(user, res, `Welcome back ${user.name} `, 200);
-};
+//   sendCookie(user, res, `Welcome back ${user.name} `, 200);
+// };
 
 export const getUserDetails = async (req, res, userType) => {
   const userId = req.user._id;
@@ -49,19 +49,19 @@ export const getUserDetails = async (req, res, userType) => {
   });
 };
 
-export const logoutUser = (req, res) => {
-  res
-    .status(200)
-    .cookie("token", "", {
-      expiers: new Date(Date.now()),
-      sameSite: process.env.NODE_ENV === "Development" ? "lax" : "none",
-      secure: process.env.NODE_ENV === "Development" ? false : true,
-    })
-    .json({
-      success: true,
-      message: "logout successfully",
-    });
-};
+// export const logoutUser = (req, res) => {
+//   res
+//     .status(200)
+//     .cookie("token", "", {
+//       expiers: new Date(Date.now()),
+//       sameSite: process.env.NODE_ENV === "Development" ? "lax" : "none",
+//       secure: process.env.NODE_ENV === "Development" ? false : true,
+//     })
+//     .json({
+//       success: true,
+//       message: "logout successfully",
+//     });
+// };
 
 export const deactivateUser = async (req, res, userType) => {
   const { id, name } = req.user;

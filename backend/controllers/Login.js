@@ -19,7 +19,19 @@ export const login = catchAsyncError(async (req, res, next) => {
   if (!isMatch)
     return next(new ErrorHandler(`username and password are incorrect`, 404));
 
-  console.log("2");
   sendCookie(user, res, `Welcome back ${user.name} `, 200);
-  console.log("3");
+});
+
+export const logout = catchAsyncError(async (req, res, next) => {
+  res
+    .status(200)
+    .cookie("token", "", {
+      expiers: new Date(Date.now()),
+      sameSite: process.env.NODE_ENV === "Development" ? "lax" : "none",
+      secure: process.env.NODE_ENV === "Development" ? false : true,
+    })
+    .json({
+      success: true,
+      message: "logout successfully",
+    });
 });

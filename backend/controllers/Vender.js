@@ -4,7 +4,7 @@ import { Customer } from "../models/cutomer.js";
 import {
   deactivateUser,
   getUserDetails,
-  loginUser,
+  // loginUser,
   registerUser,
 } from "../utils/authUtils.js";
 
@@ -15,9 +15,9 @@ export const registerVender = catchAsyncError(async (req, res, next) => {
 
 //login controler
 
-export const loginVender = catchAsyncError(async (req, res, next) => {
-  await loginUser(req, res, next, Vender);
-});
+// export const loginVender = catchAsyncError(async (req, res, next) => {
+//   await loginUser(req, res, next, Vender);
+// });
 
 export const completeVenderDetails = catchAsyncError(async (req, res, next) => {
   const { companyName, address, mobileNo, gstNumber, image } = req.body;
@@ -48,6 +48,6 @@ export const deactivateVenderAccount = catchAsyncError(async (req, res) => {
 
 //logout controler
 
-export const logoutVender = catchAsyncError((req, res) => {
-  logout(req, res);
-});
+// export const logoutVender = catchAsyncError((req, res) => {
+//   logout(req, res);
+// });
