@@ -11,6 +11,10 @@ export const addSlot = catchAsyncError(async (req, res, next) => {
     totalSpots,
     availableSpots,
     images,
+    hourlyPrice,
+    dailyPrice,
+    weeklyPrice,
+    monthlyPrice,
   } = req.body;
   const parking = await Parking.create({
     city,
@@ -20,6 +24,10 @@ export const addSlot = catchAsyncError(async (req, res, next) => {
     totalSpots,
     availableSpots,
     images,
+    hourlyPrice,
+    dailyPrice,
+    weeklyPrice,
+    monthlyPrice,
     user: req.user,
   });
   res.status(200).json({
@@ -39,6 +47,10 @@ export const updateSlot = catchAsyncError(async (req, res, next) => {
     totalSpots,
     availableSpots,
     images,
+    hourlyPrice,
+    dailyPrice,
+    weeklyPrice,
+    monthlyPrice,
   } = req.body;
   if (!id) return next(new ErrorHandler("Invalid", 400));
   const updatedSlot = {
@@ -49,7 +61,12 @@ export const updateSlot = catchAsyncError(async (req, res, next) => {
     totalSpots,
     availableSpots,
     images,
+    hourlyPrice,
+    dailyPrice,
+    weeklyPrice,
+    monthlyPrice,
   };
+
   const parking = await Parking.findByIdAndUpdate(id, updatedSlot, {
     new: true,
     runValidators: true,
@@ -72,7 +89,9 @@ export const removeSlots = catchAsyncError(async (req, res, next) => {
 });
 export const getSlot = catchAsyncError(async (req, res, next) => {
   const id = req.params.id;
-  const parking = await Parking.findById({ id: _id });
+
+  const parking = await Parking.findById({ _id: id });
+  console.log(parking);
   if (!id) return next(new ErrorHandler("Invalid", 400));
   res.status(200).json({
     success: true,
@@ -80,14 +99,13 @@ export const getSlot = catchAsyncError(async (req, res, next) => {
   });
 });
 
-export const getAllSlot = catchAsyncError(async (req, res, next) => {
-  console.log("1");
+export const getVenderAllSlot = catchAsyncError(async (req, res, next) => {
   const parkingId = req.user._id;
   console.log(parkingId);
-  const parking = await Parking.findById({ user: parkingId} );
-  console.log("3");
+  const parking = await Parking.find({ user: parkingId });
+
   if (!parkingId) return next(new ErrorHandler("Invalid", 400));
-  console.log("4");
+
   res.status(200).json({
     success: true,
     parking,

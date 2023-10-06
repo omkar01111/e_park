@@ -1,9 +1,10 @@
 import {
   Box,
   Button,
+ 
   Card,
   CardContent,
-  Container,
+  
   TextField,
   Typography,
 } from "@mui/material";
@@ -14,7 +15,7 @@ import { server } from "../../main";
 import { toastErrorMessage } from "../../utils/ErrorHandler";
 import { Link,useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { login, logout } from "../../store/reducer/Reducers";
+import { login, logout } from "../../store/reducer/AuthSlice";
 import { User } from "lucide-react";
 
 const CustomerSignUp = () => {
@@ -47,7 +48,7 @@ const CustomerSignUp = () => {
       );
 
       toast.success(data.message);
-      navigate('/')
+      navigate('/account/Customer/slots')
       dispatch(login(User))
     } catch (error) {
       toastErrorMessage(error);
@@ -81,6 +82,8 @@ const CustomerSignUp = () => {
               Sign up to get best parking loction.
             </Typography>
           </CardContent>
+
+          
 
           <form onSubmit={submitHandler}  style={{
               display: "flex",

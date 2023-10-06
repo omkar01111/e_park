@@ -1,8 +1,15 @@
 @import './assets/styles/theme.css';
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0%;
+  
   text-decoration: none;
+
+  
+}
+html,body {
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+ 
   
 }

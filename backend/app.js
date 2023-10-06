@@ -21,6 +21,8 @@ app.use(
     credentials: true,
   })
 );
+console.log('Allowed origin:', process.env.FRONTEND_URL);
+
 
 
 // router

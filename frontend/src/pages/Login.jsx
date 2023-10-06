@@ -5,7 +5,6 @@ import {
   Button,
   Card,
   CardContent,
-  Container,
   TextField,
   Typography,
 } from "@mui/material";
@@ -14,7 +13,7 @@ import toast from "react-hot-toast";
 import { toastErrorMessage } from "../utils/ErrorHandler";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { login, logout } from "../store/reducer/Reducers";
+import { login, logout } from "../store/reducer/AuthSlice";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -41,7 +40,7 @@ const Login = () => {
         dispatch(login(data.user))
         toast.success(data.message);
       } else if (user === "Customer") {
-        navigate("/");
+        navigate("/account/Customer/slots");
         dispatch(login(data.user))
         toast.success(data.message);
       } else {

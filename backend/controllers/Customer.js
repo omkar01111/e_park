@@ -8,6 +8,7 @@ import {
   // logoutUser,
   registerUser,
 } from "../utils/authUtils.js";
+import { Parking } from "../models/parkingSpots.js";
 
 //Rgister code
 export const registerCustomer = catchAsyncError(async (req, res, next) => {
@@ -54,3 +55,10 @@ export const deactivateCustomerAccount = catchAsyncError(async (req, res) => {
 // export const logoutCustomer = catchAsyncError((req, res) => {
 //   logoutUser(req, res);
 // });
+export const getAllSlots = catchAsyncError(async (req, res, next) => {
+ const parking = await Parking.find();
+     res.status(200).json({
+    success: true,
+    parking,
+  });
+});

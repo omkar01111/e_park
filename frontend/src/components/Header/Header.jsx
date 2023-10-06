@@ -1,7 +1,6 @@
 import react, { useState } from "react";
-
+import { ghostButton, solidButton } from "../../utils/CommonStyles";
 import { useSelector } from "react-redux";
-
 import {
   AppBar,
   Box,
@@ -10,27 +9,21 @@ import {
   Typography,
   Menu,
   Container,
-  Avatar,
   Button,
-  Tooltip,
   MenuItem,
 } from "@mui/material";
-
 import MenuIcon from "@mui/icons-material/Menu";
 import "../../assets/styles/theme.css";
 import CloseIcon from "@mui/icons-material/Close";
-
 import { Link } from "react-router-dom";
+import UserSettingsMenu from "./UserSettingsMenu";
 
 const Header = () => {
   const pages = ["Products", "Pricing", "Blog"];
-  const settings = ["Profile", "Account", "Dashboard", "Logout"];
   const [anchorElNav, setAnchorElNav] = useState(null);
-
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const user = useSelector((state) => state.auth.user);
   const userType = user ? user.user : null;
-
   const [anchorElUser, setAnchorElUser] = useState(null);
 
   const handleOpenNavMenu = (event) => {
@@ -47,9 +40,6 @@ const Header = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-  // console.log(isAuthenticated);
-  console.log(userType);
-
   const isOpen = Boolean(anchorElNav);
   return (
     <nav>
@@ -155,6 +145,7 @@ const Header = () => {
             >
               EasyPark
             </Typography>
+            {/*  */}
             <Box
               sx={{
                 flexGrow: 1,
@@ -206,116 +197,37 @@ const Header = () => {
 
             {/* changes */}
             {isAuthenticated ? (
-              <Box sx={{ flexGrow: 0 }}>
-                <Tooltip title="Open settings">
-                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar
-                      alt="Remy Sharp"
-                      src="/static/images/avatar/2.jpg"
-                    />
-                  </IconButton>
-                </Tooltip>
-                <Menu
-                  sx={{ mt: "45px" }}
-                  id="menu-appbar"
-                  anchorEl={anchorElUser}
-                  anchorOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  open={Boolean(anchorElUser)}
-                  onClose={handleCloseUserMenu}
-                >
-                  {settings.map((setting) => (
-                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                      <Typography textAlign="center">
-                        {userType === "Vender" ? (
-                          <>
-                            {setting === "Profile" && (
-                              <Link to="/account/Vender">Profile</Link>
-                            )}
-                            {setting === "Account" && (
-                              <Link to="/account/Vender">Account</Link>
-                            )}
-                            {setting === "Dashboard" && (
-                              <Link to="/user/Vender/dashboard">Dashboard</Link>
-                            )}
-                            {setting === "Logout" && (
-                              <Link to="/user/logout">Logout</Link>
-                            )}
-                          </>
-                        ) : userType === "Customer" ? (
-                          <>
-                            {setting === "Profile" && (
-                              <Link to="/account/Customer">Profile</Link>
-                            )}
-                            {setting === "Account" && (
-                              <Link to="/account/Customer">Account</Link>
-                            )}
-                            {setting === "Dashboard" && (
-                              <Link to="/user/Customer/dashboard">
-                                Dashboard
-                              </Link>
-                            )}
-                            {setting === "Logout" && (
-                              <Link to="/user/logout">Logout</Link>
-                            )}
-                          </>
-                        ) : null}
-                      </Typography>
-                    </MenuItem>
-                  ))}
-                </Menu>
-              </Box>
+              <UserSettingsMenu
+                handleOpenUserMenu={handleOpenUserMenu}
+                anchorElUser={anchorElUser}
+                handleCloseUserMenu={handleCloseUserMenu}
+                userType={userType}
+              />
             ) : (
-              <Box sx={{ flexGrow: 0 }}>
-                <Button
-                  sx={{
-                    width: "120px",
-                    height: "50px",
-                    margin: "0px 5px ",
-                    fontFamily: "Montserrat Alternates, sans-serif",
-                    fontWeight: "400",
-                    color: "black",
-
-                    "&:hover": {
-                      transition: ".8s",
-                      backgroundColor: "white",
-
-                      color: "#00ed64",
-                    },
-                  }}
-                >
-                  <Link to="/user/login" style={{ color: "black" }}>
-                    Sign In
-                  </Link>
-                </Button>
+              <Box sx={{ display: "flex", flexGrow: "0" }}>
+                <Link to="/user/login" style={{ color: "black" }}>
+                  <Button
+                    sx={{
+                      width: "120px",
+                      height: "50px",
+                      margin: "0px 5px ",
+                      fontFamily: "Montserrat Alternates, sans-serif",
+                      fontWeight: "400",
+                      color: "black",
+                      fontWeight: "500",
+                      "&:hover": {
+                        transition: ".8s",
+                        backgroundColor: "white",
+                         color: "darkgreen",
+                      },
+                    }}
+                  >
+                    Sign Up
+                  </Button>
+                </Link>
                 <Button
                   variant="contained"
-                  sx={{
-                    backgroundColor: "#00ed64",
-                    border: "0.5px solid #000000",
-                    borderRadius: "10px",
-                    width: "120px",
-                    height: "50px",
-                    margin: "0px 5px ",
-
-                    fontWeight: "500",
-                    color: "#000000",
-                    fontFamily: "Montserrat Alternates, sans-serif",
-
-                    "&:hover": {
-                      transition: "1s",
-                      borderRadius: "50px",
-                      border: "0.5px solid #000000",
-                      backgroundColor: "#00ed64",
-                    },
-                  }}
+                  sx={{ ...solidButton, width: "130px", height: "50px" }}
                 >
                   <Link to="/user" style={{ color: "black" }}>
                     Sign In

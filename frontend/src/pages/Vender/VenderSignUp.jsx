@@ -15,7 +15,7 @@ import { toastErrorMessage } from "../../utils/ErrorHandler";
 import { Link , useNavigate } from "react-router-dom";
 
 import { useDispatch} from "react-redux";
-import { login ,logout } from "../../store/reducer/Reducers";
+import { login ,logout } from "../../store/reducer/AuthSlice";
 
 const VenderSignUp = () => {
   const [name, setName] = useState("");

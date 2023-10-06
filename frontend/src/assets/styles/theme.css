@@ -13,7 +13,9 @@
 *{  box-sizing: border-box;
   margin: 0;
   padding: 0%;
-  text-decoration: none;}
+  text-decoration: none;
+  font-family: 'Montserrat Alternates', sans-serif;
+}
 
 /* font-family: 'Averia Libre', cursive;
 font-family: 'Hind Madurai', sans-serif;

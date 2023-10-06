@@ -5,12 +5,10 @@ const venderSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true, select: false },
-  companyName: String,
-  address: String,
-  mobileNo: String,
-  gstNumber: String,
-  image: String,
-  user:{ type: String, default: 'Vender' }
+  user: { type: String, default: "Vender" },
+  dateJoinning: { type: Date, default: Date.now },
+  
+ 
 });
 
 export const Vender = mongoose.model("Vender", venderSchema);

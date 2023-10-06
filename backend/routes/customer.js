@@ -3,6 +3,7 @@ const router = express.Router();
 import {
   completeCustomerDetails,
   deactivateCustomerAccount,
+  getAllSlots,
   getCustomerDetails,
   // loginCustomer,
   // logoutCustomer,
@@ -20,5 +21,7 @@ router
 
 router.delete("/deactivate", isAuthenticated, deactivateCustomerAccount);
 // router.get("/logout", logoutCustomer);
+
+router.get("/AllSlots", getAllSlots);
 
 export default router;

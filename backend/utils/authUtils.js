@@ -41,7 +41,7 @@ export const registerUser = async (
 
 export const getUserDetails = async (req, res, userType) => {
   const userId = req.user._id;
-  const userDetails = await userType.findById(userId);
+  const userDetails = await userType.findOne({ userId: userId });
 
   res.status(200).json({
     success: true,

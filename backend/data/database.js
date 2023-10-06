@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 export const connectDb = () => {
   mongoose
     .connect(
-      "mongodb+srv://TodoAPP:Admin123@cluster0.fdbqzjm.mongodb.net/easypark?retryWrites=true&w=majority",
+      process.env.MONGO_URI,
       {
         dbName: "easypark",
 

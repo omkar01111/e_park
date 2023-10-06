@@ -11,7 +11,7 @@ import PersonPinCircleIcon from "@mui/icons-material/PersonPinCircle";
 
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-// Import useHistory from react-router-dom
+
 
 const UserType = () => {
   const [selectedValue, setSelectedValue] = useState("a");

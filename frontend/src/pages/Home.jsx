@@ -2,14 +2,18 @@ import { Box, Button, Card, CardContent, Typography } from "@mui/material";
 import React from "react";
 import heroImage from "../assets/images/bg1.jpg";
 import "../assets/styles/home.css";
-import TouchAppIcon from "@mui/icons-material/TouchApp";
-import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
-import DataSaverOnIcon from "@mui/icons-material/DataSaverOn";
 import signUp from "../assets/images/signup.svg";
 import listing from "../assets/images/create-listing.svg";
 import paid from "../assets/images/get-paid.svg";
 import renter from "../assets/images/get-renter.svg";
-import {solidButton} from "../components/style/style"
+import { ghostButton, solidButton } from "../utils/CommonStyles";
+import BenefitsCard from "../components/Home/BenefitsCard";
+import {
+  TouchApp as TouchAppIcon,
+  VerifiedUser as VerifiedUserIcon,
+  DataSaverOn as DataSaverOnIcon,
+} from "@mui/icons-material";
+
 
 const Home = () => {
   return (
@@ -44,37 +48,10 @@ const Home = () => {
             of sharing and the opportunity to make money!
           </Typography>
           <Box marginY={"5%"} marginLeft={"-1%"}>
-            <Button
-              variant="contained"
-              sx=
-               {solidButton}
-              
-            >
+            <Button variant="contained" sx={solidButton}>
               Start Adding Spot
             </Button>
-            <Button
-              variant="ghost"
-              sx={{
-                backgroundColor: "transparent",
-                // border: "0.5px solid #000000",
-                // borderRadius: "10px",
-
-                // height: "50px",
-                margin: "0px 5px ",
-
-                fontWeight: "600",
-                color: "white",
-                fontFamily: "Montserrat Alternates, sans-serif",
-
-                "&:hover": {
-                  transition: "1s",
-                  borderRadius: "50px",
-                  // border: "0.5px solid #000000",
-                  backgroundColor: "transparent",
-                  color: "#00ed64",
-                },
-              }}
-            >
+            <Button variant="ghost" sx={ghostButton}>
               Find Spots
             </Button>
           </Box>
@@ -118,214 +95,21 @@ const Home = () => {
           alignItems={"center"}
           flexWrap={"wrap"}
         >
-          <Card
-            sx={{
-              width: "360px",
-              height: "190px",
-              margin: "20px",
-              borderRadius: "20px",
-              backgroundColor: "#edf2ec",
-
-              boxShadow: " -3px -1px 32px -7px rgba(0,0,0,0.75)",
-            }}
-          >
-            <CardContent
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                flexDirection: "column",
-              }}
-            >
-              <Card
-                sx={{
-                  width: "80px",
-                  borderRadius: "50px",
-                  height: "80px",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  position: "absolute",
-                  zIndex: 2,
-                  borderRadius: "50%",
-                  backgroundColor: "#edf2ec",
-
-                  bottom: "-11%",
-                  transform: "translateY(50%)",
-                }}
-              >
-                <TouchAppIcon fontSize="large" sx={{ color: "green" }} />
-              </Card>
-              <CardContent
-                sx={{
-                  marginTop: "25px",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  flexDirection: "column",
-                  gap: "5px",
-                }}
-              >
-                <Typography
-                  variant="h5"
-                  sx={{
-                    fontFamily: "'Montserrat Alternates', sans-serif",
-                    fontWeight: "600",
-                  }}
-                >
-                  Convenience
-                </Typography>
-                <Typography
-                  variant="p"
-                  sx={{
-                    fontFamily: "'Hind Madurai', sans-serif",
-                    color: "grey",
-                  }}
-                >
-                  Easy sign up process so you can start listing your bike in no
-                  time.
-                </Typography>
-              </CardContent>
-            </CardContent>
-          </Card>
-          <Card
-            sx={{
-              width: "360px",
-              height: "190px",
-              margin: "20px",
-              borderRadius: "20px",
-              backgroundColor: "#edf2ec",
-              boxShadow: " -3px -1px 32px -7px rgba(0,0,0,0.75)",
-            }}
-          >
-            <CardContent
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                flexDirection: "column",
-              }}
-            >
-              <Card
-                sx={{
-                  width: "80px",
-                  borderRadius: "50px",
-                  height: "80px",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  position: "absolute",
-                  zIndex: 2,
-                  borderRadius: "50%",
-                  backgroundColor: "#edf2ec",
-
-                  bottom: "-11%",
-                  transform: "translateY(50%)",
-                }}
-              >
-                <VerifiedUserIcon fontSize="large" sx={{ color: "green" }} />
-              </Card>
-              <CardContent
-                sx={{
-                  marginTop: "25px",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  flexDirection: "column",
-                  gap: "5px",
-                }}
-              >
-                <Typography
-                  variant="h5"
-                  sx={{
-                    fontFamily: "'Montserrat Alternates', sans-serif",
-                    fontWeight: "600",
-                  }}
-                >
-                  Protection
-                </Typography>
-                <Typography
-                  variant="p"
-                  sx={{
-                    fontFamily: "'Hind Madurai', sans-serif",
-                    color: "grey",
-                  }}
-                >
-                  Enjoy peace of mind with $5,000 protection against theft and
-                  unexpected damage.
-                </Typography>
-              </CardContent>
-            </CardContent>
-          </Card>
-          <Card
-            sx={{
-              width: "360px",
-              height: "190px",
-              margin: "20px",
-              borderRadius: "20px",
-              backgroundColor: "#edf2ec",
-              boxShadow: " -3px -1px 32px -7px rgba(0,0,0,0.75)",
-            }}
-          >
-            <CardContent
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                flexDirection: "column",
-              }}
-            >
-              <Card
-                sx={{
-                  width: "80px",
-                  borderRadius: "50px",
-                  height: "80px",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  position: "absolute",
-                  zIndex: 2,
-                  borderRadius: "50%",
-                  backgroundColor: "#edf2ec",
-
-                  bottom: "-11%",
-                  transform: "translateY(50%)",
-                }}
-              >
-                <DataSaverOnIcon fontSize="large" sx={{ color: "green" }} />
-              </Card>
-              <CardContent
-                sx={{
-                  marginTop: "25px",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  flexDirection: "column",
-                  gap: "5px",
-                }}
-              >
-                <Typography
-                  variant="h5"
-                  sx={{
-                    fontFamily: "'Montserrat Alternates', sans-serif",
-                    fontWeight: "600",
-                  }}
-                >
-                  Safety
-                </Typography>
-                <Typography
-                  variant="p"
-                  sx={{
-                    fontFamily: "'Hind Madurai', sans-serif",
-                    color: "grey",
-                  }}
-                >
-                  Our verification system checks details such as name, address,
-                  government ID to confirm the identity of guests.
-                </Typography>
-              </CardContent>
-            </CardContent>
-          </Card>
+          <BenefitsCard
+            icon={<TouchAppIcon fontSize="large" sx={{ color: "green" }} />}
+            title="Convenience"
+            description="Easy sign up process so you can start listing your bike in no time."
+          />
+          <BenefitsCard
+            icon={<VerifiedUserIcon fontSize="large" sx={{ color: "green" }} />}
+            title="Protection"
+            description="Enjoy peace of mind with $5,000 protection against theft and unexpected damage."
+          />
+          <BenefitsCard
+            icon={<DataSaverOnIcon fontSize="large" sx={{ color: "green" }} />}
+            title="Safety"
+            description="Our verification system checks details such as name, address, government ID to confirm the identity of guests."
+          />
         </Box>
       </Box>
 
@@ -370,18 +154,17 @@ const Home = () => {
           width={"100%"}
           sx={{
             flexDirection: { xs: "column-reverse", md: "row" },
-            gap:{xs:"50px",md:"0px"}
+            gap: { xs: "50px", md: "0px" },
           }}
         >
           <Box
             display={"flex"}
             justifyContent={"center"}
             alignItems={"start"}
-           
             flexDirection="column"
             paddingLeft={{ xs: "10%", md: "20%" }}
             gap={"15px"}
-            sx={{width:{xs:"100%",md:"50%"}}}
+            sx={{ width: { xs: "100%", md: "50%" } }}
           >
             <Typography
               variant="h4"
@@ -612,6 +395,8 @@ const Home = () => {
           </Box>
         </Box>
       </Box>
+
+      
     </div>
   );
 };
