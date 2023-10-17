@@ -14,12 +14,13 @@ import { toastErrorMessage } from "../utils/ErrorHandler";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login, logout } from "../store/reducer/AuthSlice";
+import "../app.css";
 
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -37,20 +38,19 @@ const Login = () => {
 
       if (user === "Vender") {
         navigate("/user/Vender/Dashbord");
-        dispatch(login(data.user))
+        dispatch(login(data.user));
         toast.success(data.message);
       } else if (user === "Customer") {
         navigate("/account/Customer/slots");
-        dispatch(login(data.user))
+        dispatch(login(data.user));
         toast.success(data.message);
       } else {
         toast.error("An error occurred during login.");
-        dispatch(logout())
+        dispatch(logout());
       }
-     
     } catch (error) {
       toastErrorMessage(error);
-      dispatch(logout())
+      dispatch(logout());
     }
   };
   return (
@@ -76,20 +76,25 @@ const Login = () => {
             justifyContent={"center"}
             alignItems={"center"}
             sx={{
-            
               height: "100%",
             }}
           >
             <Typography
               variant="h6"
               sx={{
-              
                 position: "relative",
                 margin: "9% auto",
                 left: "25%",
               }}
             >
-              Login in to <Typography variant="span" color={"green"} sx={{fontFamily:"'Averia Libre', cursive",}}>EasyPark</Typography>
+              Login in to{" "}
+              <Typography
+                variant="span"
+                color={"green"}
+                sx={{ fontFamily: "'Averia Libre', cursive" }}
+              >
+                EasyPark
+              </Typography>
             </Typography>
             <form
               onSubmit={submitHandler}
@@ -103,7 +108,7 @@ const Login = () => {
               action="/"
             >
               <TextField
-              color="success"
+                color="success"
                 id="email"
                 type="email"
                 value={email}
@@ -112,8 +117,7 @@ const Login = () => {
                 onChange={(e) => setEmail(e.target.value)}
               />
               <TextField
-              
-              color="success"
+                color="success"
                 id="password"
                 type="password"
                 value={password}
@@ -121,37 +125,47 @@ const Login = () => {
                 variant="outlined"
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <Button type="submit" variant="contained" disabled={email === "" || password === ""} sx={{
-              backgroundColor: "#00ed64",
-              border: "0.5px solid #000000",
-              borderRadius: "10px",
-              minWidth: "330px",
-              height: "50px",
-              margin: "0px 5px ",
+              <Button
+                type="submit"
+                variant="contained"
+                disabled={email === "" || password === ""}
+                sx={{
+                  backgroundColor: "#00ed64",
+                  border: "0.5px solid #000000",
+                  borderRadius: "10px",
+                  minWidth: "330px",
+                  height: "50px",
+                  margin: "0px 5px ",
 
-              fontWeight: "500",
-              color: "#000000",
-              fontFamily: "Montserrat Alternates, sans-serif",
+                  fontWeight: "500",
+                  color: "#000000",
+                  fontFamily: "Montserrat Alternates, sans-serif",
 
-              "&:hover": {
-                transition: "1s",
-                borderRadius: "50px",
-                border: "0.5px solid #000000",
-                backgroundColor: "#00ed64",
-              },
-            }}>
+                  "&:hover": {
+                    transition: "1s",
+                    borderRadius: "50px",
+                    border: "0.5px solid #000000",
+                    backgroundColor: "#00ed64",
+                  },
+                }}
+              >
                 Submit
               </Button>
             </form>
 
-            <Typography sx={{
+            <Typography
+              sx={{
                 position: "relative",
                 position: "relative",
                 margin: "9% auto",
                 left: "15%",
-              }}>
-            Don't have an ePark account? <Link to="/user" style={{color:"green"}}>Register</Link>
-          </Typography>
+              }}
+            >
+              Don't have an ePark account?{" "}
+              <Link to="/user" style={{ color: "green" }}>
+                Register
+              </Link>
+            </Typography>
           </CardContent>
         </Card>
       </Box>

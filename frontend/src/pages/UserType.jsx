@@ -11,7 +11,7 @@ import PersonPinCircleIcon from "@mui/icons-material/PersonPinCircle";
 
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+import "../app.css";
 
 const UserType = () => {
   const [selectedValue, setSelectedValue] = useState("a");
@@ -110,10 +110,7 @@ const UserType = () => {
               }}
               id="clientCard"
             >
-              <LocationCityIcon
-               
-                sx={{ color: "gray", fontSize: "43px" }}
-              />
+              <LocationCityIcon sx={{ color: "gray", fontSize: "43px" }} />
               <Radio
                 checked={selectedValue === "a"}
                 onChange={handleChange}
@@ -151,10 +148,7 @@ const UserType = () => {
               }}
               id="customerCard"
             >
-              <PersonPinCircleIcon
-                
-                sx={{ color: "gray", fontSize: "43px" }}
-              />
+              <PersonPinCircleIcon sx={{ color: "gray", fontSize: "43px" }} />
               <Radio
                 checked={selectedValue === "b"}
                 onChange={handleChange}
@@ -206,7 +200,10 @@ const UserType = () => {
             Join as a client
           </Button>
           <Typography margin={"20px 0px"}>
-            Already have an account? <Link to="/user/login" style={{color:"green"}}>Login</Link>
+            Already have an account?{" "}
+            <Link to="/user/login" style={{ color: "green" }}>
+              Login
+            </Link>
           </Typography>
         </CardContent>
       </Card>

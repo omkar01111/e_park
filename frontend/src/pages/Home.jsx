@@ -1,7 +1,8 @@
-import { Box, Button, Card, CardContent, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import React from "react";
 import heroImage from "../assets/images/bg1.jpg";
 import "../assets/styles/home.css";
+import "../app.css";
 import signUp from "../assets/images/signup.svg";
 import listing from "../assets/images/create-listing.svg";
 import paid from "../assets/images/get-paid.svg";
@@ -13,7 +14,6 @@ import {
   VerifiedUser as VerifiedUserIcon,
   DataSaverOn as DataSaverOnIcon,
 } from "@mui/icons-material";
-
 
 const Home = () => {
   return (
@@ -395,8 +395,6 @@ const Home = () => {
           </Box>
         </Box>
       </Box>
-
-      
     </div>
   );
 };

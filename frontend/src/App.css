@@ -1,15 +1,24 @@
-@import './assets/styles/theme.css';
+@import "./assets/styles/theme.css";
 * {
   box-sizing: border-box;
-  
-  text-decoration: none;
 
-  
+  text-decoration: none;
 }
-html,body {
+html,
+body {
   overflow-x: hidden;
   margin: 0;
   padding: 0;
- 
-  
+  animation: trannsitionIn 0.75s;
+}
+
+@keyframes trannsitionIn {
+  from {
+    opacity: 0;
+    transform: rotateX(-10deg);
+  }
+  to {
+    opacity: 1;
+    transform: rotateX(0);
+  }
 }
